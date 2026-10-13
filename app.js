@@ -19,15 +19,16 @@ function generateTicket() {
 
     let priceMessage;
 
-    if (age <= 3) {
+   if (age <= 3) {
         priceMessage = "is free";
-    } else if (4 <= 12) {
+    } else if (age <= 12) {
         priceMessage = "is $10";
-    } else if (13 <= 64) {
+    } else if (age <= 64) {
         priceMessage = "is $20";
-    } else if (age => 65) {
+    } else if (age >= 65) {
         priceMessage = "is $12";
     }
+
 
 
     resultDiv.innerHTML = `${name}, your ticket ${priceMessage}.`;
