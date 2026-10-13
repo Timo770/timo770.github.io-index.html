@@ -1,62 +1,34 @@
+function generateTicket() {
+    // 1. Retrieve input values from the HTML page
+    const name = document.getElementById('name').value.trim();
+    const ageInput = document.getElementById('age').value;
+    const resultDiv = document.getElementById('result');
 
-const wrapper = document.querySelector('#wrapper');
 
-const pokemon = [
-    {
-        name: "Charmander",
-        type: "fire",
-        maxHp: 100,
-        moves: ["Scratch", "Ember", "Flamethrower"],
-        color: "red"
-    },
-    {
-        name: "Squirtle",
-        type: "water",
-        maxHp: 110,
-        moves: ["Tackle", "Water Gun", "Bite"],
-        color: "blue"
-    },
-    {
-        name: "Pikachu",
-        type: "electric",
-        maxHp: 95,
-        moves: ["Quick Attack", "Thunder Shock", "Thunderbolt"],
-        color: "orange"
-    },
-    {
-        name: "Blastoise",
-        type: "water",
-        maxHp: 147,
-        moves: ["Tail Whip", "Tackle", "Water Gun"],
-        color: "darkblue"
+    if (name === "" || ageInput === "") {
+        resultDiv.innerHTML = "Please enter your information.";
+        return;
     }
-];
 
-function renderPokemon() {
-    wrapper.innerHTML = '';
+    const age = parseInt(ageInput);
+    if (age < 0) {
+        resultDiv.innerHTML = "";
+        return;
+    }
 
-    pokemon.forEach((item) => {
-        const ele = document.createElement("div");
-        const header = document.createElement("h2");
-        const type = document.createElement("h3");
-        const hp = document.createElement("p");
-        const moves = document.createElement("p");
 
-        ele.className = "pokemon";
-        ele.style.color = item.color;
+    let priceMessage;
 
-        header.innerHTML = item.name;
-        type.innerHTML = "Type: " + item.type;
-        hp.innerHTML = "Max HP: " + item.maxHp;
-        moves.innerHTML = "Moves: " + item.moves.join(", ");
+    if (age <= 3) {
+        priceMessage = "is free";
+    } else if (age <= 12) {
+        priceMessage = "is $10";
+    } else if (age <= 64) {
+        priceMessage = "is $20";
+    } else {
+        priceMessage = "is $12";
+    }
 
-        ele.appendChild(header);
-        ele.appendChild(type);
-        ele.appendChild(hp);
-        ele.appendChild(moves);
 
-        wrapper.appendChild(ele);
-    });
+    resultDiv.innerHTML = `${name}, your ticket ${priceMessage}.`;
 }
-
-renderPokemon();
